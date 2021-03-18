@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # se puede de esta manera si no tiene el archivo urls las app
     path('libro/', include(('apps.libro.urls','libro'))),
-    path('home/', Home, name='index')
+    path('', Home, name='index')
 ]
