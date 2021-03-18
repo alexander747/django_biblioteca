@@ -3,19 +3,10 @@ from .forms import AutorForm
 from .models import Autor
 from django.core.exceptions import ObjectDoesNotExist
 
-#vistas basadas en clase
-from django.views.generic import View
-
-# dispatch metodo que verifica que tipo de peticion es (post, get, put)
-#metodo get siempre recibe self, request, *args, **kwargs 
-
-
-
-
-class Inicio(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
-
+# request parametro que recibe de cada peticion del navegador
+def Home(request):
+    # render recibe dos parametros como minimo el request y el template
+    return render(request, 'index.html')
 
 def crearAutor(request):
     if request.method =='POST':

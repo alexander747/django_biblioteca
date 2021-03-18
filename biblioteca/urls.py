@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from apps.libro.views import Home
+from apps.libro.views import Inicio
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # se puede de esta manera si no tiene el archivo urls las app
     path('libro/', include(('apps.libro.urls','libro'))),
-    path('', Home, name='index')
+    path('', Inicio.as_view(), name='index')
 ]
