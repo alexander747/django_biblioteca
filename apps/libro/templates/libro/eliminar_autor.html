@@ -5,7 +5,7 @@
 {% endblock title %}
 
 
-{% block body %}
+{% block contenido %}
     <form method="POST">
          {% csrf_token %}
             <h2>Desea eliminar el registro {{autor.nombre}}</h2>
@@ -14,5 +14,5 @@
             <a href="{% url 'libro:listar_autor' %}">Cancelar</a>
 
     </form>
-{% endblock body %}
+{% endblock contenido %}
 

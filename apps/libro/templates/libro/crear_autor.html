@@ -1,11 +1,11 @@
 {% extends 'index.html' %}
 
 {% block title %}
-    creacion de autores
+    Crear autor
 {% endblock title %}
 
 
-{% block body %}
+{% block contenido %}
     <form method="POST">
          {% csrf_token %}
          {% if error %}
@@ -15,5 +15,5 @@
             <button>Crear</button> 
           {% endif %}  
     </form>
-{% endblock body %}
+{% endblock contenido %}
 
