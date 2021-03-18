@@ -4,18 +4,31 @@ from .models import Autor
 from django.core.exceptions import ObjectDoesNotExist
 
 #vistas basadas en clase
-from django.views.generic import View
-
-# dispatch metodo que verifica que tipo de peticion es (post, get, put)
-#metodo get siempre recibe self, request, *args, **kwargs 
+from django.views.generic import View, TemplateView
 
 
+"""
+    de View heredan las demas vistas basadas en clases, se utiliza cuando vamos a utilizar logica en el codigo
+    metodo get: siempre recibe self, request, *args, **kwargs 
+
+    1) dispatch: metodo que verifica que tipo de peticion es (post, get, put)
+    2) http_method_not_allowed(): retorna un error cuando se utiliza un metodo http no soportado
+    3) options()
 
 
-class Inicio(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
+    TemplateView: solo renderiza un template
 
+"""
+
+
+# class Inicio(View):
+#     def get(self, request, *args, **kwargs):
+#         return render(request, 'index.html')
+
+
+
+class Inicio(TemplateView):
+     template_name = 'index.html'
 
 def crearAutor(request):
     if request.method =='POST':
