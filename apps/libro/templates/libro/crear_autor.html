@@ -11,8 +11,46 @@
          {% if error %}
             <h2>{{error}}</h2>
           {% else %}  
-            {{ autor_form.as_p }}  
-            <button>Crear</button> 
+          <div class="container marginform">
+
+            <div class="row form-group">
+              <div class="col col-md-3">
+                {{ autor_form.nombre.label }}
+              </div>
+              <div class="col-12 col-md-9">
+                {{ autor_form.nombre }}
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col col-md-3">
+                {{ autor_form.apellidos.label }}
+              </div>
+              <div class="col-12 col-md-9">
+                {{ autor_form.apellidos }}
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col col-md-3">
+                {{ autor_form.nacionalidad.label }}
+              </div>
+              <div class="col-12 col-md-9">
+                {{ autor_form.nacionalidad }}
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col col-md-3">
+                {{ autor_form.descripcion.label }}
+              </div>
+              <div class="col-12 col-md-9">
+                {{ autor_form.descripcion }}
+              </div>
+            </div>
+            <button class="btn btn-primary rigth">Crear</button> 
+
+          </div>
           {% endif %}  
     </form>
 {% endblock contenido %}
