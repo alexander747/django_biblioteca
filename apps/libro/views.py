@@ -4,7 +4,7 @@ from .models import Autor
 from django.core.exceptions import ObjectDoesNotExist
 
 #vistas basadas en clase
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, ListView
 
 
 """
@@ -41,11 +41,11 @@ def crearAutor(request):
     return render(request, 'libro/crear_autor.html', {'autor_form':autor_form})            
 
 
-def listarAutor(request):
-    # autores = Autor.objects.all()
-    autores = Autor.objects.filter(estado=True)
-
-    return render(request,'libro/listar_autor.html', {'autores':autores})
+class ListarAutor(ListView):
+    model = Autor
+    template_name = 'libro/listar_autor.html'
+    context_object_name = 'autores'
+    queryset = Autor.objects.filter(estado=True)
 
 
 def editarAutor(request, id):
