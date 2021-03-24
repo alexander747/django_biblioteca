@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from .forms import AutorForm
 from .models import Autor
 from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse_lazy
 
 #vistas basadas en clase
-from django.views.generic import View, TemplateView, ListView
+from django.views.generic import View, TemplateView, ListView, UpdateView
 
 
 """
@@ -47,22 +48,13 @@ class ListarAutor(ListView):
     context_object_name = 'autores'
     queryset = Autor.objects.filter(estado=True)
 
+class EditarAutor(UpdateView):
+    model = Autor
+    template_name = 'libro/crear_autor.html'
+    form_class = AutorForm
+    success_url = reverse_lazy('libro:listar_autor')
 
-def editarAutor(request, id):
-    autor_form = None
-    error = None
-    try:
-        autor = Autor.objects.get(id=id)
-        if request.method=='GET':
-            autor_form = AutorForm(instance = autor) #llenamos el formulario con los datos del autor consultado
-        else:
-            autor_form = AutorForm(request.POST, instance = autor)
-            if autor_form.is_valid():
-                autor_form.save()
-            return redirect('libro:listar_autor') 
-    except ObjectDoesNotExist as e:
-        error = e
-    return render(request, 'libro/crear_autor.html',{'autor_form':autor_form, 'error':error})           
+   
 
 ## eliminacion directa
 # def eliminarAutor(request, id):
