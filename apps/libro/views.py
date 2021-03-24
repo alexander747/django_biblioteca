@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
 
 #vistas basadas en clase
-from django.views.generic import View, TemplateView, ListView, UpdateView
+from django.views.generic import View, TemplateView, ListView, UpdateView, CreateView
 
 
 """
@@ -30,16 +30,13 @@ from django.views.generic import View, TemplateView, ListView, UpdateView
 
 class Inicio(TemplateView):
      template_name = 'index.html'
+      
 
-def crearAutor(request):
-    if request.method =='POST':
-        autor_form = AutorForm(request.POST)
-        if autor_form.is_valid():
-            autor_form.save() #save data
-            return redirect('index') #name index desde las urls, redirije 
-    else:
-            autor_form = AutorForm()
-    return render(request, 'libro/crear_autor.html', {'autor_form':autor_form})            
+class CrearAutor(CreateView):
+    model = Autor
+    form_class=AutorForm
+    template_name = 'libro/crear_autor.html'
+    success_url = reverse_lazy('libro:listar_autor')        
 
 
 class ListarAutor(ListView):
