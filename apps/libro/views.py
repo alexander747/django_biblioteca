@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
 
 #vistas basadas en clase
-from django.views.generic import View, TemplateView, ListView, UpdateView, CreateView
+from django.views.generic import View, TemplateView, ListView, UpdateView, CreateView, DeleteView
 
 
 """
@@ -51,15 +51,6 @@ class EditarAutor(UpdateView):
     form_class = AutorForm
     success_url = reverse_lazy('libro:listar_autor')
 
-   
-
-## eliminacion directa
-# def eliminarAutor(request, id):
-#     autor = Autor.objects.get(id=id)
-#     if request.method =='POST':
-#         autor.delete() 
-#         return redirect('libro:listar_autor')    
-#     return render(request, 'libro/eliminar_autor.html', {'autor':autor})    
 
 def eliminarAutor(request, id):
     autor = Autor.objects.get(id=id)
@@ -68,3 +59,18 @@ def eliminarAutor(request, id):
         autor.save()
         return redirect('libro:listar_autor')    
     return render(request, 'libro/eliminar_autor.html', {'autor':autor})    
+
+## eliminacion directa basada en clase
+# class EliminarAutor(DeleteView):
+#     model = Autor
+#     success_url = reverse_lazy('libro:listar_autor')
+
+## eliminacion no directa basada en clase
+class EliminarAutor(DeleteView):
+    model = Autor
+
+    def post(self, request, pk, *args, **kwargs):
+        object = Autor.objects.get( id=pk )
+        object.estado = False
+        object.save()
+        return redirect('libro:listar_autor')
