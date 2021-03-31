@@ -17,10 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from apps.libro.views import Inicio
 
+# para el login
+from django.contrib.auth.decorators import login_required
+from apps.usuario.views import Login, logoutUsuario
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # se puede de esta manera si no tiene el archivo urls las app
     path('libro/', include(('apps.libro.urls','libro'))),
-    path('', Inicio.as_view(), name='index')
+    path('', login_required(Inicio.as_view()), name='index'),
+    path('accounts/login/', Login.as_view(), name='login'),
+    path('logout/', login_required(logoutUsuario), name='logout')
+
+
 ]

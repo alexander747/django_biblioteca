@@ -210,7 +210,7 @@
 
                             <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -233,7 +233,7 @@
                         <div class="card">
                             {% block contenido %}
                            
-                         <h1>Bienvenido a tu biblioteca</h1>
+                         <h1> {{user.username}} Bienvenido a tu biblioteca</h1>
 
                         
 

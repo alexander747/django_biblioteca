@@ -45,6 +45,15 @@ class ListarAutor(ListView):
     context_object_name = 'autores'
     queryset = Autor.objects.filter(estado=True)
 
+    """
+     manera de manejar el login 
+     def get(self, request, *args, **kwargs):
+         if request.user.is_authenticated:
+             return render(self.template_name)
+         else:
+             return redirect('login')
+    """         
+
 class EditarAutor(UpdateView):
     model = Autor
     template_name = 'libro/crear_autor.html'
