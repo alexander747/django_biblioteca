@@ -61,14 +61,6 @@ class EditarAutor(UpdateView):
     success_url = reverse_lazy('libro:listar_autor')
 
 
-def eliminarAutor(request, id):
-    autor = Autor.objects.get(id=id)
-    if request.method =='POST':
-        autor.estado = False
-        autor.save()
-        return redirect('libro:listar_autor')    
-    return render(request, 'libro/eliminar_autor.html', {'autor':autor})    
-
 ## eliminacion directa basada en clase
 # class EliminarAutor(DeleteView):
 #     model = Autor
