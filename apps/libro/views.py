@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import AutorForm
+from .forms import AutorForm, LibroForm
 from .models import Autor, Libro
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
@@ -82,3 +82,9 @@ class ListadoLibros(ListView):
     model = Libro        
     template_name = 'libro/libro/listar_libro.html'
     ##libro.objects.all() consulta por defecto y llega como object_list
+
+class CrearLibro(CreateView):
+    model = Libro
+    form_class = LibroForm
+    template_name = 'libro/libro/crear_libro.html'
+    success_url = reverse_lazy('libro:listado_libros')

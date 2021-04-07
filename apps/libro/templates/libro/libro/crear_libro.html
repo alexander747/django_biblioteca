@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    Crear libro
+{% endblock title %}
+
+
+{% block contenido %}
+    <form method="POST">
+         {% csrf_token %}
+      
+          <div class="container marginform">
+
+            {{ form.as_p }}
+          
+            <button class="btn btn-primary rigth">Crear</button> 
+
+          </div>
+       
+    </form>
+{% endblock contenido %}
+
