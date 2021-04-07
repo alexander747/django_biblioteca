@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import AutorForm
-from .models import Autor
+from .models import Autor, Libro
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
 
@@ -35,13 +35,13 @@ class Inicio(TemplateView):
 class CrearAutor(CreateView):
     model = Autor
     form_class=AutorForm
-    template_name = 'libro/crear_autor.html'
+    template_name = 'libro/autor/crear_autor.html'
     success_url = reverse_lazy('libro:listar_autor')        
 
 
 class ListarAutor(ListView):
     model = Autor
-    template_name = 'libro/listar_autor.html'
+    template_name = 'libro/autor/listar_autor.html'
     context_object_name = 'autores'
     queryset = Autor.objects.filter(estado=True)
 
@@ -56,7 +56,7 @@ class ListarAutor(ListView):
 
 class EditarAutor(UpdateView):
     model = Autor
-    template_name = 'libro/crear_autor.html'
+    template_name = 'libro/autor/crear_autor.html'
     form_class = AutorForm
     success_url = reverse_lazy('libro:listar_autor')
 
@@ -75,3 +75,10 @@ class EliminarAutor(DeleteView):
         object.estado = False
         object.save()
         return redirect('libro:listar_autor')
+
+
+#---------------------------------------------------------BOOKS----------------------------------------------------------------------
+class ListadoLibros(ListView):
+    model = Libro        
+    template_name = 'libro/libro/listar_libro.html'
+    ##libro.objects.all() consulta por defecto y llega como object_list
