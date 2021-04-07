@@ -32,7 +32,7 @@
                         <td>{{libro.fecha_creacion}}</td>
                         <td>
                             <a href="{% url 'libro:editar_libro' libro.id %}">Editar</a>
-                            <a href="">Eliminar</a>
+                            <a href="{% url 'libro:eliminar_libro' libro.id %}">Eliminar</a>
 
                         </td>
 

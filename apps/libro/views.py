@@ -82,6 +82,7 @@ class ListadoLibros(ListView):
     model = Libro        
     template_name = 'libro/libro/listar_libro.html'
     ##libro.objects.all() consulta por defecto y llega como object_list
+    queryset = Libro.objects.filter(estado = True)
 
 class CrearLibro(CreateView):
     model = Libro
@@ -94,3 +95,12 @@ class ActualizarLibro(UpdateView):
     form_class = LibroForm
     template_name = 'libro/libro/crear_libro.html'
     success_url = reverse_lazy('libro:listado_libros')
+
+class EliminarLibro(DeleteView):
+    model = Libro
+
+    def post(self, request, pk, *args, **kwargs):
+        object = Libro.objects.get(id = pk)
+        object.estado = False
+        object.save()
+        return redirect('libro:listado_libros')    
